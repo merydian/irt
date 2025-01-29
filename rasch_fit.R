@@ -43,7 +43,7 @@ for (i in 1:length(ability_levels)) {
     (probability_correct[i] * (1 - probability_correct[i]))
   chi_square_index <- chi_square_index + chi_square_term
 }
-chi_square_index <- round(chi_square_index, 2)  # Round to 2 decimal places
+chi_square_index <- round(chi_square_index, 2)  # Round to 2 decimals
 
 # Plot the observed proportions and the ICC on the same canvas
 plot(
