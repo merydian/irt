@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------------
 # Item Response Simulation & Model Fit Assessment
 #
-# This script simulates item responses based on the Rasch model and evaluates 
+# This script simulates item responses based on the Rasch model and evaluates
 # the fit of an Item Characteristic Curve (ICC). It:
 # - Defines ability levels and assigns examinees.
 # - Computes theoretical response probabilities.
@@ -34,12 +34,14 @@ for (i in 1:length(ability_levels)) {
 }
 
 # Simulate observed probability of correct responses i.e. "proportions"
-observed_proportions <- rbinom(length(ability_levels), num_examinees_per_level, probability_correct) / num_examinees_per_level
+observed_proportions <- rbinom(length(ability_levels),
+                               num_examinees_per_level,
+                               probability_correct) / num_examinees_per_level
 
 # Calculate the Chi-square goodness-of-fit
 chi_square_index <- 0  # Initialize Chi-square index
 for (i in 1:length(ability_levels)) {
-  chi_square_term <- num_examinees_per_level[i] * (observed_proportions[i] - probability_correct[i])^2 / 
+  chi_square_term <- num_examinees_per_level[i] * (observed_proportions[i] - probability_correct[i])^2 /
     (probability_correct[i] * (1 - probability_correct[i]))
   chi_square_index <- chi_square_index + chi_square_term
 }
@@ -47,19 +49,35 @@ chi_square_index <- round(chi_square_index, 2)  # Round to 2 decimals
 
 # Plot the observed proportions and the ICC on the same canvas
 plot(
-  ability_levels, observed_proportions,
-  xlim = c(-3, 3), ylim = c(0, 1),
-  xlab = "Ability", ylab = "Probability of Correct Response",
-  main = paste("Rasch Model: Chi-square =", chi_square_index, "\nItem Difficulty (b) =", item_difficulty),
-  pch = 16, col = "blue"  # Blue points for observed proportions
+  ability_levels,
+  observed_proportions,
+  xlim = c(-3, 3),
+  ylim = c(0, 1),
+  xlab = "Ability",
+  ylab = "Probability of Correct Response",
+  main = paste(
+    "Rasch Model: Chi-square =",
+    chi_square_index,
+    "\nItem Difficulty (b) =",
+    item_difficulty
+  ),
+  pch = 16,
+  col = "blue"  # Blue points for observed proportions
 )
 
 # Add the ICC (probability_correct) as a red line
-lines(ability_levels, probability_correct, col = "red", lwd = 2)  # Red line for the ICC
+lines(ability_levels,
+      probability_correct,
+      col = "red",
+      lwd = 2)  # Red line for the ICC
 
 # Add a legend to differentiate between the observed proportions and the ICC
 legend(
-  "bottomright", legend = c("Observed Proportions", "Item Characteristic Curve (ICC)"),
-  col = c("blue", "red"), pch = c(16, NA), lty = c(NA, 1), lwd = c(NA, 2)
+  "bottomright",
+  legend = c("Observed Proportions", "Item Characteristic Curve (ICC)"),
+  col = c("blue", "red"),
+  pch = c(16, NA),
+  lty = c(NA, 1),
+  lwd = c(NA, 2)
 )
 

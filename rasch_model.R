@@ -1,4 +1,4 @@
-# Rasch model ICC function 
+# Rasch model ICC function
 
 rasch_icc <- function(ability_levels, item_difficulty) {
   # Description:
@@ -16,21 +16,24 @@ rasch_icc <- function(ability_levels, item_difficulty) {
   probabilities <- 1 / (1 + exp(-1.7 * (ability_levels - item_difficulty)))
   
   # Create a data frame for plotting and returning results
-  results <- data.frame(
-    Ability = ability_levels, 
-    Probability = probabilities
-  )
+  results <- data.frame(Ability = ability_levels, Probability = probabilities)
   
   # Plot the ICC
   plot(
-    results$Ability, results$Probability, 
-    type = "l", col = "blue", lwd = 2, 
-    xlab = "Respondent Ability", ylab = "Probability of Correct Response",
+    results$Ability,
+    results$Probability,
+    type = "l",
+    col = "blue",
+    lwd = 2,
+    xlab = "Respondent Ability",
+    ylab = "Probability of Correct Response",
     main = paste("ICC for Rasch Model (Item Difficulty =", item_difficulty, ")"),
     ylim = c(0, 1)
   )
   abline(h = 0.5, col = "red", lty = 2)  # Add a horizontal line at 50%
-  abline(v = item_difficulty, col = "green", lty = 2)  # Add a vertical line at difficulty
+  abline(v = item_difficulty,
+         col = "green",
+         lty = 2)  # Add a vertical line at difficulty
   
   # Return the results
   return(results)
@@ -41,4 +44,3 @@ ability_values <- seq(-3, 3, by = 0.1)  # Respondent ability levels from -3 to 3
 ability_values
 item_difficulty <- 0  # Difficulty of the item
 rasch_icc(ability_levels = ability_values, item_difficulty = item_difficulty)
-
