@@ -16,9 +16,11 @@ set.seed(123)
 
 # Generate a sequence of ability levels
 ability_levels <- seq(-3, 3, 0.1875)  # From -3 to 3 with increments of 0.1875
+ability_levels
 
 # Set the number of examinees per ability level
 num_examinees_per_level <- rep(21, length(ability_levels))  # 21 examinees for each level
+num_examinees_per_level
 
 # Generate the item difficulty parameter for the Rasch model
 item_difficulty <- 0  # Change this as you like

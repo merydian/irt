@@ -39,6 +39,6 @@ rasch_icc <- function(ability_levels, item_difficulty) {
 # Example Usage
 ability_values <- seq(-3, 3, by = 0.1)  # Respondent ability levels from -3 to 3
 ability_values
-item_difficulty <- 2  # Difficulty of the item
+item_difficulty <- 0  # Difficulty of the item
 rasch_icc(ability_levels = ability_values, item_difficulty = item_difficulty)
 
